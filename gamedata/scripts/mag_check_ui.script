@@ -5,6 +5,9 @@
 
 HUD = nil
 
+local ammo_check_start_time
+local delay_til_ui_show = 500
+
 class "MagCheckUI" (CUIScriptWnd)	-- 1
 
 function MagCheckUI:__init() super() -- 2
@@ -55,10 +58,11 @@ function MagCheckUI:Update()		-- 4
 end
 
 function show_hud()
+	ammo_check_start_time = time_global()
 	if HUD == nil then
 		HUD = MagCheckUI() -- calls instance of your HUD class
 	end
-	
+
 	if HUD and not HUD:IsShown() then
 		get_hud():AddDialogToRender(HUD) -- renders HUD on screen
 		--Register_UI("MagCheckUI", "my_script_name", HUD)
@@ -73,11 +77,8 @@ function close_hud()
 	end
 end
 
-local ammo_check_start_time
-
-local delay_til_ui_show = 500
-
 function actor_on_hud_animation_play(anim_table, obj)
+	if mag_check_ui.external then return end
 	first_hud_mag_pos = nil
 	first_hud_mag_rot = nil
 	if string.find(anim_table.anm_name, "ammo_check") then
@@ -156,12 +157,13 @@ function actor_on_update()
 		end
 		
 		local text = string.format("%s/%s %s", curr_ammo_count, max_ammo_count, ammo_str_name)
-		
+		if mag_check_ui.bar_only then text = "" end
+
 		self = HUD
 		if not self then return end
 		
 		local progress = clamp(curr_ammo_count / max_ammo_count, 0, 1)
-		
+
 		-- time to find the position for the mag bone or bullet bone
 		if curr_ammo_count == 0 then
 			for i, name in ipairs(magazine_bone_names) do
@@ -293,7 +295,7 @@ function fallback(self, text, progress)
 	--printf("pos is %s", pos)
 	self.my_text:SetWndPos(pos)
 	self.my_text:SetText(text)
-	
+
 	local new_pos = vector2():set(pos.x, pos.y - 20)
 	
 	self.cover_bar_bg:SetWndPos(new_pos)
