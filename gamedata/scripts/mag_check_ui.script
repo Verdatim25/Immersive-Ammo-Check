@@ -56,19 +56,19 @@ end
 
 function show_hud()
 	if HUD == nil then
-		HUD = MyHUD() -- calls instance of your HUD class
+		HUD = MagCheckUI() -- calls instance of your HUD class
 	end
 	
 	if HUD and not HUD:IsShown() then
 		get_hud():AddDialogToRender(HUD) -- renders HUD on screen
-		--Register_UI("MyHUD", "my_script_name", HUD)
+		--Register_UI("MagCheckUI", "my_script_name", HUD)
 	end
 end
 
 function close_hud()
 	if HUD and HUD:IsShown() then
 		get_hud():RemoveDialogToRender(HUD)
-		--Unregister_UI("MyHUD")
+		--Unregister_UI("MagCheckUI")
 		HUD = nil -- optional, destroys HUD instance
 	end
 end
