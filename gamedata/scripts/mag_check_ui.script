@@ -5,13 +5,13 @@
 
 HUD = nil
 
-class "MyHUD" (CUIScriptWnd)	-- 1
+class "MagCheckUI" (CUIScriptWnd)	-- 1
 
-function MyHUD:__init() super() -- 2
+function MagCheckUI:__init() super() -- 2
 	self:InitControls()
 end
 
-function MyHUD:InitControls()
+function MagCheckUI:InitControls()
 	self:SetWndRect(Frect():set(0,0, 1024, 768)) -- sets corner positions (left, top, right, bottom) of the dialog window
 	self:SetAutoDelete(true)
 	
@@ -45,11 +45,11 @@ function MyHUD:InitControls()
 	self.my_text:Enable(false)
 end
 
-function MyHUD:__finalize()	-- 3
+function MagCheckUI:__finalize()	-- 3
 	-- your code (optional)
 end
 
-function MyHUD:Update()		-- 4
+function MagCheckUI:Update()		-- 4
 	CUIScriptWnd.Update(self)
 	-- your code
 end
