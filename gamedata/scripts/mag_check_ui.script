@@ -108,11 +108,11 @@ local UpdateFreq = 10
 
 -- entries mentioned later in the list have higher priority due to how ipairs works
 magazine_bone_names = {
-"wpn_mag", "wpn_magazine", "wpn_magazin", "mag", "magazin", "magazine", "mag_1", "magazin_1", "wpn_mag_1", "pmag", "clip", "shell_tube"
+"wpn_mag", "wpn_magazine", "wpn_magazin", "mag", "magazin", "magazine", "mag_1", "magazin_1", "wpn_mag_1", "pmag", "clip", "shell_tube", "mod_magazine"
 }
 
 bullet_in_magazine_names = {
-"bullet_4", "bullet_3", "bullet_2", "bullet_1", "bullet", "bullets", "bullet1", "bullet2", "wpn_bullet", "wpn_bullet_1", "wpn_bullet_2", "bullets1", "bullets2", "wpn_magazine_bullet_2", "shell_2", "shell_tube"
+"bullet_4", "bullet_3", "bullet_2", "bullet_1", "bullet", "bullets", "bullet1", "bullet2", "wpn_bullet", "wpn_bullet_1", "wpn_bullet_2", "bullets1", "bullets2", "wpn_magazine_bullet_2", "shell_2", "shell_tube", "bullet001", "patron_in_weapon_001"
 }
 
 
@@ -203,7 +203,7 @@ function actor_on_update()
 			end
 		end
 		
-		if not hud_mag_pos then 
+		if not hud_mag_pos then
 			fallback(self, text, progress)
 			return
 		end
